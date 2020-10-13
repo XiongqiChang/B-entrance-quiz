@@ -33,9 +33,9 @@ public class StudentService {
         studentList.add(new Student(10,"庄周"));
         studentList.add(new Student(11,"马超"));
         studentList.add(new Student(12,"刘备"));
-        studentList.add(new Student(13,"哪吒"));
+      /*  studentList.add(new Student(13,"哪吒"));
         studentList.add(new Student(14,"大乔"));
-        studentList.add(new Student(15,"蔡文姬"));
+        studentList.add(new Student(15,"蔡文姬"));*/
     }
 
 
