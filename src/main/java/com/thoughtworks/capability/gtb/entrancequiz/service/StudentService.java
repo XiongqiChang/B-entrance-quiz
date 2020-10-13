@@ -1,6 +1,7 @@
 package com.thoughtworks.capability.gtb.entrancequiz.service;
 
 import com.thoughtworks.capability.gtb.entrancequiz.pojo.Student;
+import com.thoughtworks.capability.gtb.entrancequiz.vo.StudentVO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -38,9 +39,16 @@ public class StudentService {
 
 
     public List<Student> getStudentList() {
-
         return  studentList;
+    }
 
+    public void  addStudent(StudentVO studentVo) {
 
+        Student student = Student.builder().id(studentList.size() + 1).name(studentVo.getName()).build();
+        studentList.add(student);
+
+    }
+
+    public void groupStudent() {
     }
 }
