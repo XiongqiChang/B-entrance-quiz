@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: xqc
@@ -39,7 +40,7 @@ public class StudentController {
 
     @GetMapping("/student/group")
     public ResponseEntity groupStudent(){
-         studentService.groupStudent();
-        return ResponseEntity.ok().build();
+        Map map = studentService.groupStudent();
+        return ResponseEntity.ok().body(map);
     }
 }

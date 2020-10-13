@@ -2,11 +2,12 @@ package com.thoughtworks.capability.gtb.entrancequiz.service;
 
 import com.thoughtworks.capability.gtb.entrancequiz.pojo.Student;
 import com.thoughtworks.capability.gtb.entrancequiz.vo.StudentVO;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: xqc
@@ -49,6 +50,50 @@ public class StudentService {
 
     }
 
-    public void groupStudent() {
-    }
+    public Map groupStudent() {
+
+        Map<Integer,List<Student>> map = new HashMap<>();
+
+        Integer  groupSize = 6;
+
+        int listSize = studentList.size() / groupSize;
+
+        for (int i = 1; i <= groupSize; i++){
+         List<Student> newList = new ArrayList<>();
+         if (studentList.size() % groupSize == 0){
+             for (int j = 1; j <= listSize;j++){
+                int index = (int)(Math.random()*studentList.size());
+                if (!newList.contains(studentList.get(index))){
+                    newList.add(studentList.get(index));
+                }else{
+                    continue;
+                }
+            }
+            map.put(i,newList);
+        }else{
+             List<Student> leftList = new ArrayList<>();
+             int leftSize = studentList.size() % groupSize;
+             for (int k = 0; k < leftSize; k++){
+                int index = (int)(Math.random()*studentList.size());
+                if (!leftList.contains(studentList.get(index))){
+                    leftList.add(studentList.get(index));
+                    studentList.remove(index);
+                }
+            }
+             for (int m = 1; m <= listSize; m++){
+                 int index = (int)(Math.random()*studentList.size());
+                 if (!newList.contains(studentList.get(index))){
+                     newList.add(studentList.get(index));
+                 }else{
+                     continue;
+                 }
+             }
+             newList.add(leftList.get(i-1));
+             System.out.println(newList);
+             map.put(i,newList);
+        }
+     }
+        return  map;
+
+   }
 }
