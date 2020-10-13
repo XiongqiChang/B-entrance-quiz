@@ -61,7 +61,6 @@ public class StudentService {
         for (int i = 1; i <= groupSize; i++) {
             List<Student> newList = new ArrayList<>();
             if (studentList.size() % groupSize == 0) {
-                System.out.println("我是品骏的");
                 for (int j = 1; j <= listSize; ) {
                     int index = (int) (Math.random() * studentList.size());
                     if (!newList.contains(studentList.get(index))) {
@@ -71,7 +70,6 @@ public class StudentService {
                 }
                 map.put(i, newList);
             } else {
-                System.out.println("我不平均的");
                 List<Student> leftList = new ArrayList<>();
                 int leftSize = studentList.size() % groupSize;
                 for (int k = 0; k < leftSize; k++) {
@@ -96,7 +94,6 @@ public class StudentService {
                 map.put(i, newList);
             }
         }
-        System.out.println(map);
         return map;
     }
 }
