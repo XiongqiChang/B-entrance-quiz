@@ -18,6 +18,8 @@ import java.util.Map;
 @Service
 public class StudentService {
 
+    // GTB: studentList不需要static,且最好加上final
+    // GTB: 不符合三层架构，数据应该用xxxRepository来保存
     private static List<Student> studentList = new ArrayList<>();
 
     static {
@@ -46,22 +48,28 @@ public class StudentService {
 
     public void addStudent(StudentVO studentVo) {
 
+        // GTB: “studentList.size() + 1”不可读，建议引入中间变量
         Student student = Student.builder().id(studentList.size() + 1).name(studentVo.getName()).build();
         studentList.add(student);
 
     }
 
+    // GTB: 应该创建专门的对象来表示Team
+    // GTB: 长方法，建议按逻辑抽取多个子方法
     public Map groupStudent() {
 
         Map<Integer, List<Student>> map = new HashMap<>();
 
+        // GTB: Magic Number
         Integer groupSize = 6;
 
+        // GTB: 随机分组算法可读性不高
         int listSize = studentList.size() / groupSize;
         for (int i = 1; i <= groupSize; i++) {
             List<Student> newList = new ArrayList<>();
             if (studentList.size() % groupSize == 0) {
                 for (int j = 1; j <= listSize; ) {
+                    // GTB: 随机算法实现过于复杂，可以使用Collections.shuffle()打乱学员
                     int index = (int) (Math.random() * studentList.size());
                     if (!newList.contains(studentList.get(index))) {
                         newList.add(studentList.get(index));

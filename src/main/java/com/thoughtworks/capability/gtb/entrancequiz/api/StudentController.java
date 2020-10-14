@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
+// GTB: 最好不要加注释
 /**
  * @Author: xqc
  * @Date: 2020/10/13 - 10 - 13 - 13:49
@@ -22,6 +23,7 @@ import java.util.Map;
 @RestController
 public class StudentController {
 
+    // GTB: 推荐使用构造函数注入
     @Autowired
     private StudentService studentService;
 
@@ -32,7 +34,10 @@ public class StudentController {
         return  ResponseEntity.ok().body(studentList);
     }
 
+    // GTB: url不符合Restful实践
     @PostMapping("/student")
+    // GTB: Post请求应该返回201
+    // GTB: ResponseEntity应该使用泛型
     public ResponseEntity addStudent(@RequestBody StudentVO studentVo){
         studentService.addStudent(studentVo);
         return ResponseEntity.ok().build();
